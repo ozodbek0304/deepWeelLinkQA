@@ -1,9 +1,7 @@
-const savedRef = window.location.href || null;
+const urlParams = new URLSearchParams(window.location.search);
+const savedRef = urlParams.get("ref") || localStorage.getItem("ref_code") || null;
 
-if (savedRef) {
-  localStorage.setItem("ref_code", savedRef);
-}
-
+const referral_link = window.location.href || null;
 
 function getOSName(ua) {
   if (/android/i.test(ua)) return "android";
@@ -43,7 +41,7 @@ function getDeviceInfo() {
   const ua = navigator.userAgent;
 
   return {
-    referral_link: savedRef || null,
+    referral_link: referral_link || null,
     os_name: getOSName(ua),
     os_version: getOSVersion(ua),
     device_model: navigator.platform || "unknown",
