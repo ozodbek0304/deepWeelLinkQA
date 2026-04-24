@@ -1,5 +1,4 @@
-const urlParams = new URLSearchParams(window.location.search);
-const savedRef = urlParams.get("ref") || localStorage.getItem("ref_code") || null;
+const savedRef = window.location.href || null;
 
 if (savedRef) {
   localStorage.setItem("ref_code", savedRef);
@@ -44,7 +43,7 @@ function getDeviceInfo() {
   const ua = navigator.userAgent;
 
   return {
-    ref_code: savedRef || null,
+    referral_link: savedRef || null,
     os_name: getOSName(ua),
     os_version: getOSVersion(ua),
     device_model: navigator.platform || "unknown",
@@ -106,40 +105,10 @@ async function init() {
 
   // ---- iOS ----
   if (/iphone|ipad|ipod/.test(ua)) {
-    const appStoreUrl = "https://apps.apple.com/us/app/deepenwell/id6642689331";
-
-    if (savedRef) {
-      const openedAt = Date.now();
-
-      // Agar ilova ochilsa va foydalanuvchi qaytib kelsa — App Store'ga yo'naltirish
-      document.addEventListener("visibilitychange", () => {
-        if (
-          document.visibilityState === "visible" &&
-          Date.now() - openedAt > 1500
-        ) {
-          window.location.href = appStoreUrl;
-        }
-      });
-
-      // Custom URL scheme orqali ilovani ochishga urinish
-      window.location.href = `deepenwell://referral?ref=${encodeURIComponent(savedRef)}`;
-
-      // Agar 2.5 soniyada ilova ochilmasa — App Store'ga o'tish
-      setTimeout(() => {
-        if (document.visibilityState !== "hidden") {
-          window.location.href = appStoreUrl;
-        }
-      }, 2500);
-    } else {
-      window.location.href = appStoreUrl;
-    }
-
-    return;
+    window.location.href =
+      "https://apps.apple.com/us/app/deepenwell/id6642689331";
   }
 
-  // ---- Boshqa qurilmalar (Desktop va h.k.) ----
-  // Ixtiyoriy: Desktop uchun fallback sahifani ko'rsatish yoki boshqa URL
-  console.info("Bu qurilma Android yoki iOS emas. Yo'naltirish amalga oshirilmadi.");
 }
 
 // Skriptni ishga tushirish
