@@ -7,13 +7,13 @@ if (savedRef) {
 
 
 function getOSName(ua) {
-  if (/android/i.test(ua)) return "Android";
-  if (/iphone|ipad|ipod/i.test(ua)) return "iOS";
-  if (/windows phone/i.test(ua)) return "Windows Phone";
-  if (/windows/i.test(ua)) return "Windows";
-  if (/macintosh|mac os x/i.test(ua)) return "macOS";
-  if (/linux/i.test(ua)) return "Linux";
-  return "Unknown";
+  if (/android/i.test(ua)) return "android";
+  if (/iphone|ipad|ipod/i.test(ua)) return "ios";
+  if (/windows phone/i.test(ua)) return "windows_phone";
+  if (/windows/i.test(ua)) return "windows";
+  if (/macintosh|mac os x/i.test(ua)) return "macos";
+  if (/linux/i.test(ua)) return "linux";
+  return "unknown";
 }
 
 function getOSVersion(ua) {
@@ -52,7 +52,6 @@ function getDeviceInfo() {
     screen_height: String(window.screen.height),
     pixel_ratio: String(window.devicePixelRatio || 1),
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    ip_address: null,
     collected_at: new Date().toISOString(),
   };
 }
