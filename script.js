@@ -84,12 +84,12 @@ async function init() {
   if (/android/.test(ua)) {
     const fallback =
       "https://play.google.com/store/apps/details?id=uz.deepen.mobile" +
-      (savedRef ? `&referrer=${encodeURIComponent(savedRef)}` : "");
+      (savedRef ? `&referrer=${savedRef}` : "");
 
     if (savedRef) {
       // Deep link orqali ilovaga o'tish, muvaffaqiyatsiz bo'lsa Play Store'ga
       const intentUrl =
-        `intent://deepenwell/referral?ref=${encodeURIComponent(savedRef)}` +
+        `intent://deepenwell/referral?ref=${savedRef}` +
         `#Intent;scheme=deepenwell;package=uz.deepen.mobile;` +
         `S.browser_fallback_url=${encodeURIComponent(fallback)};end`;
 
