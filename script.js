@@ -91,7 +91,7 @@ async function init() {
       const intentUrl =
         `intent://deepenwell/referral?ref=${savedRef}` +
         `#Intent;scheme=deepenwell;package=uz.deepen.mobile;` +
-        `S.browser_fallback_url=${encodeURIComponent(fallback)};end`;
+        `S.browser_fallback_url=${fallback};end`;
 
       window.location.href = intentUrl;
     } else {
