@@ -1,7 +1,7 @@
-const urlParams = new URLSearchParams(window.location.search);
-const savedRef = urlParams.get("ref") || localStorage.getItem("ref_code") || null;
-
 const referral_link = window.location.href || null;
+
+const savedRef = referral_link.split('ref=')[1];
+
 
 function getOSName(ua) {
   if (/android/i.test(ua)) return "android";
