@@ -21,13 +21,25 @@ function getOSVersion(ua) {
   let match = ua.match(/android\s([\d.]+)/i);
   if (match) return match[1];
 
-  // iOS
-  match = ua.match(/os\s([\d_]+)/i);
+  // iOS — "CPU iPhone OS 17_4_1 like" yoki "CPU OS 16_0 like"
+  match = ua.match(/cpu(?:\s+iphone)?\s+os\s+([\d_]+)/i);
   if (match) return match[1].replace(/_/g, ".");
 
-  // Windows
-  match = ua.match(/windows nt\s([\d.]+)/i);
+  // Windows Phone
+  match = ua.match(/windows phone(?:\s+os)?\s+([\d.]+)/i);
   if (match) return match[1];
+
+  // Windows NT
+  match = ua.match(/windows nt\s([\d.]+)/i);
+  if (match) {
+    const ntMap = {
+      "10.0": "10/11",
+      "6.3": "8.1",
+      "6.2": "8",
+      "6.1": "7",
+    };
+    return ntMap[match[1]] || match[1];
+  }
 
   // macOS
   match = ua.match(/mac os x\s([\d_]+)/i);
@@ -35,6 +47,8 @@ function getOSVersion(ua) {
 
   return "Unknown";
 }
+
+console.log(getOSVersion(navigator.userAgent));
 
 // =============================================
 //  Qurilma ma'lumotlarini yig'ish
