@@ -1,9 +1,7 @@
-const urlParams = new URLSearchParams(window.location.search);
-const savedRef = urlParams.get("ref") || null;
-
-
-
 const referral_link = window.location.href || null;
+
+const savedRef = referral_link.split('ref=')[1];
+
 
 
 function getOSName(ua) {
@@ -48,7 +46,6 @@ function getOSVersion(ua) {
   return "Unknown";
 }
 
-console.log(getOSVersion(navigator.userAgent));
 
 // =============================================
 //  Qurilma ma'lumotlarini yig'ish
@@ -101,14 +98,14 @@ async function init() {
   if (/android/.test(ua)) {
     const fallback =
       "https://play.google.com/store/apps/details?id=uz.deepen.mobile" +
-      (savedRef ? `&referrer=${encodeURIComponent(savedRef)}` : "");
+      (savedRef ? `&referrer=${savedRef}` : "");
 
     if (savedRef) {
       // Deep link orqali ilovaga o'tish, muvaffaqiyatsiz bo'lsa Play Store'ga
       const intentUrl =
-        `intent://deepenwell/referral?ref=${encodeURIComponent(savedRef)}` +
+        `intent://deepenwell/referral?ref=${savedRef}` +
         `#Intent;scheme=deepenwell;package=uz.deepen.mobile;` +
-        `S.browser_fallback_url=${encodeURIComponent(fallback)};end`;
+        `S.browser_fallback_url=${fallback};end`;
 
       window.location.href = intentUrl;
     } else {
