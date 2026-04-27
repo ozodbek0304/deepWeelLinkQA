@@ -55,7 +55,7 @@ function getDeviceInfo() {
   const ua = navigator.userAgent;
 
   alert(ua);
-  alert(getOSName(ua));
+  alert(getOSVersion(ua));
 
 
   return {
