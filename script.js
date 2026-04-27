@@ -54,6 +54,10 @@ function getOSVersion(ua) {
 function getDeviceInfo() {
   const ua = navigator.userAgent;
 
+  alert(ua);
+  alert(getOSName(ua));
+
+
   return {
     referral_link: referral_link || null,
     os_name: getOSName(ua),
